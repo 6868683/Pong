@@ -1,5 +1,4 @@
  void paddleLeft(){
-  loop();
    if(keyCode == DOWN && paddleY1+height/5 <= height){
    noLoop();
    paddleY1 = paddleY1 + height/70;
