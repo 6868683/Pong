@@ -1,11 +1,12 @@
-float x = width/2, xspeed = 5, y = height/2, yspeed = 5, xwidth = width/60;
+float x = width/2, xspeed = width/90, y = height/2, yspeed = 5, xwidth = width/60, reboundSpeed = width/90;
 float paddleY1 = 200, paddleY2 = 200;
-float[] xSpeed = {-5, 5};
+float[] xSpeed = {-(width/90), (width/90)};
 float[] yspeedsave =  new float[1], xspeedsave =  new float[1];
 boolean player1cheat = false, player2cheat = false;
 int score2 = 0, score1 = 0; 
-boolean pause = false;
+boolean pause = false, FullS = false;
 void setup() {
+  frameRate(80);
   surface.setResizable(true);
   size(1000, 500);
   background(255);
@@ -14,6 +15,7 @@ void setup() {
   x = width/2;
   y = height/2;
   noSmooth();
+  surface.hideCursor();
 }
 
 void draw() {
@@ -28,6 +30,7 @@ void draw() {
     yspeed = random(-1, 1);
   }
   if (keyPressed) {
+    FullScreen();
     pause();
     paddleRight();
     paddleLeft();
@@ -52,6 +55,7 @@ void draw() {
   paddleLeftdraw();
   paddleRightdraw();
   fill(255, 0, 0);
+  line(width/2, 0, width/2, height);
   ellipse(x, y, circlediameter, circlediameter);
   x = x + xspeed;
   y = y + yspeed;
@@ -69,7 +73,6 @@ void draw() {
       }
     }
   }
-  line(width/2, 0, width/2, height);
 
   if ((x+((width/60)/2) > width) || (x-((width/60)/2) > width) || (x+((width/60)/2) < 0) || (x-((width/60)/2) < 0) ) {
     xspeed = xspeed * -1;
