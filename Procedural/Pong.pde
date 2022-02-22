@@ -1,7 +1,7 @@
 float x = width/2, xspeed = 5, y = height/2, yspeed = 5, xwidth = width/60;
 float paddleY1 = 200, paddleY2 = 200;
 float[] xSpeed = {-5, 5};
-float[] yspeedsave =  new float[1];
+float[] yspeedsave =  new float[1], xspeedsave =  new float[1];
 boolean player1cheat = false, player2cheat = false;
 int score2 = 0, score1 = 0; 
 boolean pause = false;
@@ -13,10 +13,17 @@ void setup() {
   xspeed = xSpeed[int(random(-1, 2))];
   x = width/2;
   y = height/2;
+  noSmooth();
 }
 
 void draw() {
-
+  float circlediameter = width/60;
+  if (pause == false) {
+    yspeedsave = append(yspeedsave, yspeed);
+  }
+  if (pause == false) {
+    xspeedsave = append(xspeedsave, xspeed);
+  }
   while (yspeed >=0 && yspeed <= 0.5 && yspeed <= -0.5) {
     yspeed = random(-1, 1);
   }
@@ -45,7 +52,7 @@ void draw() {
   paddleLeftdraw();
   paddleRightdraw();
   fill(255, 0, 0);
-  ellipse(x, y, width/60, width/60);
+  ellipse(x, y, circlediameter, circlediameter);
   x = x + xspeed;
   y = y + yspeed;
   if (x-((width/60)/2) <= (width/20)+width/60) {
@@ -83,9 +90,6 @@ void draw() {
     x = width/2;
     y = height/2;
     score2 = score2+1;
-  }
-  if (yspeed >= 1) {
-    yspeedsave = append(yspeedsave, yspeed);
   }
   print(yspeedsave[yspeedsave.length-1]);
 }
