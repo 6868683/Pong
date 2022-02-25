@@ -6,7 +6,7 @@ boolean player1cheat = false, player2cheat = false;
 int score2 = 0, score1 = 0; 
 boolean pause = false, FullS = false;
 void setup() {
-  frameRate(80);
+  frameRate(1000000);
   surface.setResizable(true);
   size(1000, 500);
   background(255);
@@ -18,8 +18,8 @@ void setup() {
 }
 
 void draw() {
+  
   if (pause==false) {
-    noCursor();
     float circlediameter = width/60;
     if (pause == false) {
       yspeedsave = append(yspeedsave, yspeed);
@@ -95,15 +95,16 @@ void draw() {
       y = height/2;
       score2 = score2+1;
     }
-    print(yspeedsave[yspeedsave.length-1]);
+    print(frameRate, "   ");
   } else if (pause == true) {
     if (keyPressed) {    
       pause();
-      FullScreen();
     }
-    if (mouseX >= width*(1/4) && mouseX <= width*(3/4)) {
-      cursor(WAIT);
-    }
+
+    if(mousePressed){
+    if (pmouseX >= width*(1/4) && pmouseX <= width*(3/4)) {
+      exit();
+    }}
     stroke(#D1D1D1);
     fill(195, 161, 161, 3);
     rect(width/4, height/4, width/2, height/2);
