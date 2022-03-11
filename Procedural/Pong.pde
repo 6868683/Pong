@@ -1,12 +1,14 @@
-float x = width/2, xspeed = width/90, y = height/2, yspeed = 5, xwidth = width/60, reboundSpeed = width/90;
+
+float x = width/2, xspeed, y = height/2, yspeed = 5, xwidth = width/60;
 float paddleY1 = 200, paddleY2 = 200;
-float[] xSpeed = {-(width/90), (width/90)};
+float[] xSpeed = {-5, 5};
 float[] yspeedsave =  new float[1], xspeedsave =  new float[1];
 boolean player1cheat = false, player2cheat = false;
-int score2 = 0, score1 = 0; 
+int score2 = 0, score1 = 0, senst = 15; 
+int col = #D1D1D1, hover1 = col, hover2 = col, hover3 = col, hover4 = col, hover5 = col;
 boolean pause = false, FullS = false;
 void setup() {
-  frameRate(1000000);
+  frameRate(100);
   surface.setResizable(true);
   size(1000, 500);
   background(255);
@@ -18,7 +20,7 @@ void setup() {
 }
 
 void draw() {
-  
+
   if (pause==false) {
     float circlediameter = width/60;
     if (pause == false) {
@@ -35,6 +37,7 @@ void draw() {
       pause();
       paddleRight();
       paddleLeft();
+      Sensitivity();
       if ((key == 'C' || key == 'c') && player1cheat == false) {
         player1cheat = true;
       }
@@ -63,14 +66,14 @@ void draw() {
     if (x-((width/60)/2) <= (width/20)+width/60) {
       if (y >= paddleY1 && y <= paddleY1+(height/5)) {
         xspeed = xspeed * -1;
-        xspeed = xspeed+(1*(-(xspeed/(-xspeed))));
+        xspeed = xspeed+(0.001*(-(xspeed/(-xspeed))));
       }
     }
     if (x+((width/60)/2) >= 0.3) { 
       if (x+((width/60)/2) >= (width-(width/20))) {
         if (y >= paddleY2 && y <= paddleY2+(height/5)) {
           xspeed = xspeed * -1;
-          xspeed = xspeed-(1*(-(xspeed/(-xspeed))));
+          xspeed = xspeed-(0.001*(-(xspeed/(-xspeed))));
         }
       }
     }
@@ -95,18 +98,107 @@ void draw() {
       y = height/2;
       score2 = score2+1;
     }
-    print(frameRate, "   ");
+    fill(255);
+    text(int(frameRate), width/100, height/30);
   } else if (pause == true) {
-    if (keyPressed) {    
+    if (keyPressed) {  
       pause();
     }
+    if (mousePressed) {
 
-    if(mousePressed){
-    if (pmouseX >= width*(1/4) && pmouseX <= width*(3/4)) {
-      exit();
-    }}
-    stroke(#D1D1D1);
+      if (mouseX > width*1.25/4 && mouseX < width*2.75/4) {
+        if (mouseY > height*1.3/4 && mouseY < height*1.6/4) {
+          score1 = 0; 
+          score2 = 0; 
+          setup();
+          redraw();
+          pause = false;
+        }
+      }
+      if (mouseX > width*1.25/4 && mouseX < width*1.75/4) {
+        if (mouseY > height*1.8/4 && mouseY < height*2.2/4) {
+          senst = 15;
+        }
+      }
+      if (mouseX > width*1.75/4 && mouseX < width*2.25/4) {
+        if (mouseY > height*1.8/4 && mouseY < height*2.2/4) {
+          senst = 30;
+        }
+      }
+      if (mouseX > width*2.25/4 && mouseX < width*2.75/4) {
+        if (mouseY > height*1.8/4 && mouseY < height*2.2/4) {
+          senst = 50;
+        }
+      }
+        if (mouseX > width*1.25/4 && mouseX < width*2.75/4) {
+          if (mouseY > height*2.3/4 && mouseY < height*2.6/4) {
+            player1cheat = true;
+            player2cheat = true;
+          }
+        }
+      
+      
+    }
+    if (mouseX > width*1.25/4 && mouseX < width*2.75/4) {
+      if (mouseY > height*1.3/4 && mouseY < height*1.6/4) {
+        hover1 = #F5F5F5;
+      }
+    } else { 
+      hover1 = col;
+    }
+    if (mouseX > width*1.25/4 && mouseX < width*1.75/4) {
+      if (mouseY > height*1.8/4 && mouseY < height*2.2/4) {
+        hover2 = #F5F5F5;
+      }
+    } else {
+      hover2 = col;
+    }
+    if (mouseX > width*1.75/4 && mouseX < width*2.25/4) {
+      if (mouseY > height*1.8/4 && mouseY < height*2.2/4) {
+        hover3 = #F5F5F5;
+      }
+    } else {
+      hover3 = col;
+    }
+    if (mouseX > width*2.25/4 && mouseX < width*2.75/4) {
+      if (mouseY > height*1.8/4 && mouseY < height*2.2/4) {
+        hover4 = #F5F5F5;
+      }
+    } else {
+      hover4 = col;
+    }
+    if (mouseX > width*1.25/4 && mouseX < width*2.75/4) {
+      if (mouseY > height*2.3/4 && mouseY < height*2.6/4) {
+        hover5 = #F5F5F5;
+      }
+    } else { 
+      hover5 = col;
+    }
+
+
+    fill(col);
+    stroke(col);
+    textSize(height*1/20);
+    textAlign(CENTER);
+    text("Pause", width*2/4, height/3.3);
     fill(195, 161, 161, 3);
     rect(width/4, height/4, width/2, height/2);
+    fill(hover2);
+    rect(width*1.25/4, height*1.8/4, width*0.49/4, height/12);
+    fill(hover3);
+    rect(width*1.75/4, height*1.8/4, width*0.49/4, height/12);
+    fill(hover4);
+    rect(width*2.25/4, height*1.8/4, width*0.49/4, height/12);
+    fill(hover1);
+    rect(width*1.25/4, height*1.30/4, width*1.5/4, height/12);
+    fill(hover5);
+    rect(width*1.25/4, height*2.30/4, width*1.5/4, height/12);
+    fill(#000000);
+    text("Reset", width*2/4, height*1.5/4);
+    text("Default", width*1.5/4, height*2.05/4);
+    text("Fast", width*2/4, height*2.05/4);
+    text("Godly", width*2.5/4, height*2.05/4);
+    text("Screensaver", width*2/4, height*2.5/4);
+
   }
 }

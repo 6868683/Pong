@@ -6,6 +6,7 @@ void pause() {
       xspeed = 0;
       pause =true;
     } else {
+      
       yspeed = yspeedsave[yspeedsave.length-1]; 
       pause = false;
       xspeed = xspeedsave[xspeedsave.length-1];
