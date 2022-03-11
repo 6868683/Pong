@@ -113,6 +113,8 @@ void draw() {
           setup();
           redraw();
           pause = false;
+          player1cheat = false;
+          player2cheat = false;
         }
       }
       if (mouseX > width*1.25/4 && mouseX < width*1.75/4) {
