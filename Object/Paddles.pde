@@ -1,5 +1,5 @@
 class Paddles {
-  float x, y, WIDTH, HEIGHT, speed;
+  float x, y, WIDTH, HEIGHT, speed, outsideR, outsideL, outsideD, outsideU;
   color colour;
   int up, down;
   Paddles(float xParameter, float yParameter, float WIDTHParameter, float HEIGHTParameter, color colourParameter, float speedParameter, int upParameter, int downParameter ) {
@@ -11,6 +11,10 @@ class Paddles {
     this.speed = speedParameter;
     this.up = upParameter;
     this.down = downParameter;
+    this.outsideR = x+WIDTH;
+    this.outsideL = x;
+    this.outsideU = y;
+    this.outsideD = y+HEIGHT;
   }
 
   void draw() {
