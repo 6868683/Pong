@@ -24,7 +24,6 @@ class Paddles {
     bounce();
   }
   void move() {
-    if (pause == false) {
       if (keyPressed) {
         if (keyCode == up) {
           if (y+HEIGHT < height) {
@@ -36,7 +35,7 @@ class Paddles {
           }
         }
       }
-    }
+    
   }
   void bounce() {
   }

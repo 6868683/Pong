@@ -6,16 +6,14 @@ class Balls {
     this.y = yParameter;
     this.diameter = diameterParameter;
     this.colour = colourParameter;
-    this.xSpeed = (int(random(-2, 2))*((1/diameter)*10));
+    this.xSpeed = (int(random(-2, 2))*((1/diameter)*100));
     this.ySpeed = 0.5;
-    this.outsideRight = x+(diameter/2);
-    this.outsideLeft = x-(diameter/2);
   }//endconstructor
   void draw() {
     fill(colour);
     ellipse(x, y, diameter, diameter);
-    move();
     bounce();
+    move();
   }//enddraw
   void move() {
     x += xSpeed;
@@ -28,9 +26,10 @@ class Balls {
     if ((y+(diameter/2) > height) || (y-(diameter/2) > height) || (y+(diameter/2) < 0) || (y-(diameter/2) < 0) ) {
       ySpeed = ySpeed * -1;
     }
-    if ((outsideRight > width) || (outsideLeft > width) || (outsideLeft < 0) || (outsideRight < 0) ) {
+    if ((x+(diameter/2) >= width) || (x-(diameter/2) >= width) || (x-(diameter/2) <= 0) || (x+(diameter/2) <= 0) ) {
       x = width/2;
       y = height/2;
+      xSpeed = (int(random(-2, 2))*((1/diameter)*100));
     }
   }//endbounce
 }//end Balls 
